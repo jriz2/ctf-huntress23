@@ -119,11 +119,12 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
     Video Walkthrough:
 
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/43157070-b4b9-4fd1-88fe-8ae25ae941c6
+
 <font color="green"> **flag{03e8ba07d1584c17e69ac95c341a2569}** </font>
 
 ---
 ---
-
 
 ## **MALWARE Challenges**
 

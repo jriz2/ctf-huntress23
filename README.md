@@ -2,7 +2,7 @@
 
 Team Name: **D2CTF** | Username: **SlowMo7ion**
 
-![Alt text](images/ctf-banner.png)
+![Alt text](sources/ctf-banner.png)
 
 ---
 
@@ -10,7 +10,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 ### BaseFFFF+1 | 50 points | 10/4/2023
 
-![Alt text](images/baseFFFF-challenge.png)
+![Alt text](sources/baseFFFF-challenge.png)
 
 > Maybe you already know about base64, but what if we took it up a notch?
 >
@@ -32,7 +32,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 3. Let's use this tool to decode the message and retrieve the flag
 
-    ![Alt text](images/baseFFFF-flag.png)
+    ![Alt text](sources/baseFFFF-flag.png)
 
 <font color="green"> **flag{716abce880f09b7cdc7938eddf273648}** </font>
 
@@ -41,7 +41,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 #### CaeserMirror | 50 points | 10/5/2023
 
-![Alt text](images/CM-challenge.png)
+![Alt text](sources/CM-challenge.png)
 
 > Caesar caesar, on the wall, who is the fairest of them all?
 >
@@ -55,17 +55,17 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 1. Download and open the file
 
-    ![Alt text](images/CM-text.png)
+    ![Alt text](sources/CM-text.png)
 
 
 2. Using the hint, let's throw it into CyberChef. 
     * Take the First half of the text and use the ROT13 operation
 
-    ![Alt text](images/CM-rot1.png))
+    ![Alt text](sources/CM-rot1.png))
 
     * Then take the second half and use the ROT13 and Reverse operations
 
-     ![Alt text](images/CM-rot2.png))
+     ![Alt text](sources/CM-rot2.png))
 
 3. With the message decoded and in the correct order, assemble both halves and grab each piece of the flag from the body of text.
 
@@ -93,7 +93,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 ### F12 | 50 points | 10/10/2023
 
-![Alt text](images/F12-challenge.png)
+![Alt text](sources/F12-challenge.png)
 
 > Remember when Missouri got into hacking!?! You gotta be fast to catch this flag!
 > 
@@ -107,7 +107,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 1. Navigate to the web page and click on the Capture The Flag button. A pop-up window opens, but immediately closes. Let's inspect the source to see if we can learn more about what happens when we click the button.
 
-    ![Alt text](images/F12-flag-page.png)
+    ![Alt text](sources/F12-flag-page.png)
 
     * *A javascript function `ctf()` appears to open another window to a page called `capture_the_flag.html` when the Capture The Flag button is pushed.*
 
@@ -115,7 +115,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 3. Now we see a button that says `Your flag is:`, but when we click on it nothing happens. Let's inspect the source again to see what it's supposed to do and reveal the flag.
 
-    ![Alt text](images/F12-flag.png)
+    ![Alt text](sources/F12-flag.png)
 
     Video Walkthrough:
 
@@ -129,7 +129,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 ### Zerion | 50 points | 10/2/2023
 
-![Alt text](images/zerion-challenge.png)
+![Alt text](sources/zerion-challenge.png)
 
 > We observed some odd network traffic, and found this file on our web server... can you find the strange domains that our systems are reaching out to?
 >
@@ -142,11 +142,11 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 **Solution Walkthrough**
 1. Verify the file type with `file`
 
-    ![Alt text](images/zerion-file.png)
+    ![Alt text](sources/zerion-file.png)
 
 2. Since this looks like it is a php script, let's open the file in a text editor to view the syntax *(truncated output)*
 
-    ![Alt text](images/zerion-script.png)
+    ![Alt text](sources/zerion-script.png)
 
 3. It looks like script is chaining multiple encodings and patterns together, let's break down each step:
 
@@ -156,7 +156,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 4. Reverse the order of encoding using [CyberChef](https://gchq.github.io/CyberChef/) to reveal the full syntax and flag.
 
-    ![Alt text](images/zerion-decode.png)
+    ![Alt text](sources/zerion-decode.png)
 
 <font color="green"> **flag{af10370d485952897d5183aa09e19883}** </font>
 
@@ -164,7 +164,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 ### HumanTwo | 50 points | 10/3/2023
 
-![Alt text](images/HumanTwo-challenge.png)
+![Alt text](sources/HumanTwo-challenge.png)
 
 > During the MOVEit Transfer exploitation, there were tons of "indicators of compromise" hashes available for the human2.aspx webshell! We collected a lot of them, but they all look very similar... except for very minor differences. Can you find an oddity?
 >
@@ -178,25 +178,25 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     unzip human2.aspx_iocs.zip -d human2.aspx_iocs
     ```
 
-    ![Alt text](images/HumanTwo-unzip.png)
+    ![Alt text](sources/HumanTwo-unzip.png)
 
 2. These filenames look like hashes, let's inspect the contents of a few to see if there are any obvious differences
     * Cycling through a few files in a text editor reveals a slight change on `line 36` for each file
 
-    ![Alt text](images/HumanTwo-files.gif)
+    ![Alt text](sources/HumanTwo-files.gif)
 
 3. Now that we have found a change from file to file, we can drill into that further. Let's use `grep` against a common string on line 36 to see if anything else stands out
     ```bash
     grep -r "String.Equals" .   #run from dir containing files
     ```
     
-    ![Alt text](images/HumanTwo-grep.png)
+    ![Alt text](sources/HumanTwo-grep.png)
 
     * Nice! We found something different on the `cc53495bb42e4f6563b68cdbdd5e4c2a9119b498b488f53c0f281d751a368f19` file. Let's try to decode the values on this line
 
 4. The strings seem to represent hexadecimal values (containing a-f 0-9 only). Let's use CyberChef with the `From Hex` recipe to decode the text and reveal the flag
 
-    ![Alt text](images/HumanTwo-decoded.png)
+    ![Alt text](sources/HumanTwo-decoded.png)
 
 
 <font color="green"> **flag{6ce6f6a15dddb0ebb332bfaf2b0b85d1}** </font>
@@ -205,7 +205,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 ### Hot Off The Press | 50 points | 10/3/2023
 
-![Alt text](images/HOTP-challenge2.png)
+![Alt text](sources/HOTP-challenge2.png)
 
 > Oh wow, a malware analyst shared a sample that I read about in the news!
 >
@@ -222,7 +222,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     file hot_off_the_press
     ```
     
-    ![Alt text](images/HOTP-file-type.png)
+    ![Alt text](sources/HOTP-file-type.png)
 
     * This is a UHarc archive file, so we can use some Windows tools to examine it further We'll move over to Windows for the rest of the challenge
 
@@ -234,11 +234,11 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     .\uharc06b\UHARC.EXE e -pw .\hot_off_the_press.uha
     ```
 
-    ![Alt text](images/HOTP-extracted.png)
+    ![Alt text](sources/HOTP-extracted.png)
 
 3. Open the `hot_off_the_press.ps1` file in a text editor to dissect the encoded text. We'll focus on decoding the `base64`, then handle the `gzip` compression.
 
-    ![Alt text](images/HOTP-raw.png)
+    ![Alt text](sources/HOTP-raw.png)
 
 3. Use CyberChef to create the following Recipe to handle the initial encoded string:
     * Remove all non base64 characters 
@@ -250,7 +250,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     * Convert From Base64
     * From Hex
 
-        ![Alt text](images/HOTP-cyberchef-solve.gif)
+        ![Alt text](sources/HOTP-cyberchef-solve.gif)
 
 <font color="green"> **flag{dbfe5f755a898ce5f2088b0892850bf7}** </font>
 
@@ -267,7 +267,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 ### Traffic | 50 points | 10/4/2023
 
-![Alt text](images/traffic-challenge.png)
+![Alt text](sources/traffic-challenge.png)
 
 >We saw some communication to a sketchy site... here's an export of the network traffic. Can you track it down?
 >
@@ -286,7 +286,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 2. List out the contents we just unzipped. Following the hints, let's start with the DNS logs to search for a "sketchy site"
 
-    ![Alt text](images/traffic-unzipped.png)
+    ![Alt text](sources/traffic-unzipped.png)
 
 3. Using zcat to parse the gzipped files, let's look at fields first to better understand column positions within the log, then the first 10 entries in the DNS logs to see how they are structured. We can see from here that dns queries are listed in the 10th field.
 
@@ -295,7 +295,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     zcat dns.*.log.gz | cut -f 3,5 -d ' ' | sort -u | head -10 #first 10 log entries 
     ```
 
-    ![Alt text](images/traffic-dnsllog.png)
+    ![Alt text](sources/traffic-dnsllog.png)
 
 4. Let's focus on the 10th position to isolate DNS hostnames and see if anything jumps out.
 
@@ -303,7 +303,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     zcat dns.*.log.gz | cut -f 3,5 -d ' ' | awk '{print $10}' | sort | uniq -c | sort -nr
     ```
 
-    ![Alt text](images/traffic-dns-sorted.png)
+    ![Alt text](sources/traffic-dns-sorted.png)
 
 5. At first glance, nothing jumps out. Let's grep for "sketch" based on our hint above.
 
@@ -311,13 +311,13 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     zcat dns.*.log.gz | cut -f 3,5 -d ' ' | sort -u | awk '{print $10}' | grep sketch
     ```
 
-    ![Alt text](images/traffic-sketchysite.png)
+    ![Alt text](sources/traffic-sketchysite.png)
 
     * Nice! We found 6 instances to `sketchysite.github.io` let's check it out
 
 6. Visit `sketchysite.github.io` for the flag
 
-    ![Alt text](images/traffic-flag.png)
+    ![Alt text](sources/traffic-flag.png)
 
 <font color="green"> **flag{8626fe7dcd8d412a80d0b3f0e36afd4a}** </font>
 
@@ -328,7 +328,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 ### I Wont Let You Down | 50 points | 10/5/2023
 
-![Alt text](images/IWLYD-challenge.png)
+![Alt text](sources/IWLYD-challenge.png)
 
 > OK Go take a look at this IP:
 >
@@ -338,7 +338,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 1. Let's check out the url in a browser. Yep, it's a Rick-roll! But, we also got a hint to try `nmap`
 
-    ![Alt text](images/IWLYD-url.png)
+    ![Alt text](sources/IWLYD-url.png)
 
 
 
@@ -347,16 +347,15 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     nmap -Pn -sT 155.138.162.158 -p- -sV 
     ```
 
-    ![Alt text](images/IWLYD-scan.png)
+    ![Alt text](sources/IWLYD-scan.png)
     
 2. Our scan revealed some services running on non-standard and high port numbers. Since these aren't commonly used, let's banner grabbing with `netcat` to get the flag.
     ```bash
     nc 155.138.162.158 8888
     ```
     
-    ![Alt text](images/IWLYD-flag.png)
+    ![Alt text](sources/IWLYD-flag.png)
 
-    * It's also a Rick-roll, but we also got the flag!
-
+    * It's also a Rick-roll, but we still got the flag!
 
 <font color="green"> **flag{93671c2c38ee872508770361ace37b02}** </font>

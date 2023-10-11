@@ -164,6 +164,49 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 <font color="green"> **flag{196a71490b7b55c42bf443274f9ff42b}** </font>
 
 ---
+
+### Baking | 50 points | 10/11/2023
+
+![Alt text](sources/Baking-challenge.png)
+
+> Do you know how to make cookies? How about HTTP flavored?
+>
+> Press the Start button in the top-right to begin this challenge.
+> Connect with: http://chal.ctf.games:30484
+
+**Solution Walkthrough**
+
+1. Based on the challenge description, we can safely assume that we'll need to perform cookie manipulation. Interact with the site using a browser with developer options open and see what cookies are stored. They will be under the Application tab in the Storage section.
+
+    ![Alt text](sources/Baking-site.png)
+    
+    * We can see that the Magic Cookies need to bake for 7200 minutes, Maybe we can speed this up
+
+    ![Alt text](sources/Baking-cookie.png)
+
+    * There is a cookie stored with a base64 encoded value
+
+2. Let's decode in the value in CyberChef to see what data is being passed to the site. There is a timestamp we might be able to manipulate to trick the server into thinking that the 7200-minute bake time has already passed
+
+    ![Alt text](sources/Baking-decoded-cookie.png)
+
+3.  Using CyberChef, let's back-date the cookie value by 1 year, re-encode to base64, then get ready to send it to the server with BurpSuite.
+
+    ![Alt text](sources/Baking-mycookie.png)
+
+4. Using BurpSuite, we can modify the cookie using proxy interception before sending it to the server. Paste our updated base64 cookie value, then forward the request to the server to reveal the flag
+
+    ![Alt text](sources/Baking-burp.png)
+
+    ![Alt text](sources/Baking-flag.png)
+
+    * BurpSuite Video Walkthrough:
+
+        <video src="sources/Baking-video.mp4" controls title="Title"></video>
+
+<font color="green"> **flag{c36fb6ebdbc2c44e6198bf4154d94ed4}** </font>
+
+---
 ---
 
 ## **MALWARE Challenges**

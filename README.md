@@ -584,6 +584,58 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 <font color="green"> **flag{60bb3bfaf703e0fa36730ab70e115bd7}** </font>
 
 ---
+
+### VeeBeeEee | 50 points | 10/11/2023
+
+> While investigating a host, we found this strange file attached to a scheduled task. It was invoked with wscript or something... can you find a flag?
+> 
+> **NOTE**: this challenge is based off of a real malware sample. We have done our best to "defang" the code, but out of abudance of caution it is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.
+> 
+> Download the file(s) below. ttachments: [veebeeeee](https://huntress.ctf.games/files/cc8958c3e52c676db02299c8f96536db/veebeeeee)
+
+**Solution Walkthrough**
+
+1. Do initial recognition using the `file` command to determine file type (if there is one). This one is just raw data
+    ```bash
+    file veebeeeee
+    ```
+
+    ![Alt text](sources/VB-file.png)
+
+2. Open in a text editor to view the data. 
+
+    ![Alt text](sources/VB-raw.png)
+
+3. The data is not human-readable, so let's try CyberChef and start with the Magic operation
+
+    ![Alt text](sources/VB-magic.png)
+
+4. CyberChef found a Recipe to decode the text. Use `Microsoft_Script_Decoder()` to make the ouput more readable.
+
+    ![Alt text](sources/VB-chefout.png)
+
+5. We need to clean this up further by removing all of the instances of: `''''''''''''''''al37ysoeopm'al37ysoeopm`
+
+6. Now we can begin identifying how the PowerShell commands are obfuscated within the script:
+    1. The strings contianing the code have been separated into multiple variables, then concatenated together
+
+        ![Alt text](sources/VB-strings.png)
+
+    2. Ampersands `&` are removed later in the script to finish cleaning up the syntax, so let's clean up the rest of it and assemble everything
+
+        ![Alt text](sources/VB-replace.png)
+
+7. We have finished cleaning up the syntax. With the code cleaned up, we can see that a request is being made to pull a file from a Pastebin link; a common staging place for malware.
+
+    ![Alt text](sources/VB-clean.png)
+
+8. Since this is a CTF and not real malware, let's visit the link to reveal the flag: https://pastebin.com/raw/SiYGwwcz
+
+    ![Alt text](sources/VB-flag.png)
+
+<font color="green"> **flag{ed81d24958127a2adccfb343012cebff}** </font>
+
+---
 ---
 
 ## **OSINT Challenges**

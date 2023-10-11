@@ -203,6 +203,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
     * BurpSuite Video Walkthrough:
 
         <video src="sources/Baking-video.mp4" controls title="Title"></video>
+        https://github.com/jriz2/ctf-huntress23/assets/108373636/784ffa1d-4428-488d-86f9-04aa3fb6b2e4
 
 <font color="green"> **flag{c36fb6ebdbc2c44e6198bf4154d94ed4}** </font>
 

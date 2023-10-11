@@ -587,6 +587,8 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
 ### VeeBeeEee | 50 points | 10/11/2023
 
+![Alt text](sources/VB-challenge.png)
+
 > While investigating a host, we found this strange file attached to a scheduled task. It was invoked with wscript or something... can you find a flag?
 > 
 > **NOTE**: this challenge is based off of a real malware sample. We have done our best to "defang" the code, but out of abudance of caution it is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.

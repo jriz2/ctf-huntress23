@@ -34,7 +34,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
     ![Alt text](sources/baseFFFF-flag.png)
 
-<font color="green"> **flag{716abce880f09b7cdc7938eddf273648}** </font>
+Answer: **`flag{716abce880f09b7cdc7938eddf273648}`**
 
 ---
 
@@ -86,7 +86,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
     > brace. Wow! Now THAT is a CTF! Who knew we could milk the caesar cipher to this 
     > extent?? Someone get that Julius Caesar guy a medal!
 
-<font color="green"> **flag{julius_in_a_reflection}** </font>
+Answer: **`flag{julius_in_a_reflection}`**
 
 ---
 
@@ -120,7 +120,63 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
     https://github.com/jriz2/ctf-huntress23/assets/108373636/43157070-b4b9-4fd1-88fe-8ae25ae941c6
 
-<font color="green"> **flag{03e8ba07d1584c17e69ac95c341a2569}** </font>
+Answer: **`flag{03e8ba07d1584c17e69ac95c341a2569}`**
+
+---
+
+### Dialtone | 50 points | 10/3/2023
+
+![Alt text](sources/DT-challenge.png)
+
+> Well would you listen to those notes, that must be some long phone number or something!
+>
+> Download the file(s) below. Attachments: [dialtone.wav](https://huntress.ctf.games/files/f45233d4c250e2f75e5aae03725fffc7/dialtone.wav)
+
+**Solution Walkthrough**
+
+1. Using a [Dual Tone Multi Frequency (DTMF)](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling) tool, we can detect the corresponding numbers for each dialtone. This can be done with `dtmf` or `dtmf2num` on the command line, or through a web-based tool such as [DialABC](http://dialabc.com/sound/detect/)
+    ```bash
+    dtmf dialtone.wav
+    ```
+
+    ![Alt text](sources/DT-dtmf.png)
+
+2. Viewing the file in Sonic Visualiser confirms that the individual dialtones are consecutive without inconsistent pauses, or other timing anomalies that might indicate T9, or another cipher.
+
+    ![Alt text](sources/DT-sonic.png)
+
+3. Since we have a large integer from the dialtone pattern, we can try converting it to Hexadecimal using Python.
+    * *Note: Use the builtin `format()` function in Python. The `codecs.encode()` method, `CyberChef`, and other online conversion tools do not pass the value as an integer and return incorrect Hex data.*
+        ```Python
+        #!/usr/bin/env python
+
+        dialtone = 13040004482820197714705083053746380382743933853520408575731743622366387462228661894777288573
+
+        dhex = format(dialtone, 'x')            #int to hex
+
+        print(dhex)
+        ```
+
+        ![Alt text](sources/DT-hex.png)
+
+        * Our output looks like valid Hex data, maybe we can go to ASCII.
+
+4. Let's add another line to our Python program to convert the Hex value to ASCII and return the flag. To solve this challenge, we went from: `dialtone -> integer -> Hex -> ASCII`
+    ```Python
+    #!/usr/bin/env python
+    import codecs
+
+    dialtone = 13040004482820197714705083053746380382743933853520408575731743622366387462228661894777288573
+
+    dhex = format(dialtone, 'x')            #int to hex
+    flag = codecs.decode(dhex, 'hex')       #hex to ascii
+
+    print(flag.decode())                    #print flag as a string
+    ```
+
+    ![Alt text](sources/DT-flag.png)
+
+Answer: **`flag{6c733ef09bc4f2a4313ff63087e25d67}`**
 
 ---
 
@@ -161,7 +217,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
     ![Alt text](sources/Comprezz-flag.png)
 
-<font color="green"> **flag{196a71490b7b55c42bf443274f9ff42b}** </font>
+Answer: **`flag{196a71490b7b55c42bf443274f9ff42b}`**
 
 ---
 
@@ -204,7 +260,7 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
         <video src="sources/Baking-video.mp4" controls title="Title"></video>
 
-<font color="green"> **flag{c36fb6ebdbc2c44e6198bf4154d94ed4}** </font>
+Answer: **`flag{c36fb6ebdbc2c44e6198bf4154d94ed4}`**
 
 ---
 ---
@@ -242,7 +298,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/zerion-decode.png)
 
-<font color="green"> **flag{af10370d485952897d5183aa09e19883}** </font>
+Answer: **`flag{af10370d485952897d5183aa09e19883}`**
 
 ---
 
@@ -284,7 +340,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     ![Alt text](sources/HumanTwo-decoded.png)
 
 
-<font color="green"> **flag{6ce6f6a15dddb0ebb332bfaf2b0b85d1}** </font>
+Answer: **`flag{6ce6f6a15dddb0ebb332bfaf2b0b85d1}`**
 
 ---
 
@@ -337,7 +393,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
         ![Alt text](sources/HOTP-cyberchef-solve.gif)
 
-<font color="green"> **flag{dbfe5f755a898ce5f2088b0892850bf7}** </font>
+Answer: **`flag{dbfe5f755a898ce5f2088b0892850bf7}`**
 
 **Resources:**
 
@@ -413,7 +469,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/PHP-flag.png)
 
-<font color="green"> **flag{9b5c4313d12958354be6284fcd63dd26}** </font>
+Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
 
 ---
 ---
@@ -474,7 +530,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/traffic-flag.png)
 
-<font color="green"> **flag{8626fe7dcd8d412a80d0b3f0e36afd4a}** </font>
+Answer: **`flag{8626fe7dcd8d412a80d0b3f0e36afd4a}`**
 
 ---
 
@@ -527,7 +583,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/Wimble-flag.png)
 
-<font color="green"> **FLAG{97F33C9783C21DF85D79D613B0B258BD}** </font>
+Answer: **`FLAG{97F33C9783C21DF85D79D613B0B258BD}`**
 
 ---
 
@@ -577,7 +633,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/DF-flag.png)
 
-<font color="green"> **flag{35446041dc161cf5c9c325a3d28af3e3}** </font>
+Answer: **`flag{35446041dc161cf5c9c325a3d28af3e3}`**
 
 ---
 
@@ -624,7 +680,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
     
     * *This flag was not returned with the curly braces. Add them before submission.*
 
-<font color="green"> **flag{60bb3bfaf703e0fa36730ab70e115bd7}** </font>
+Answer: **`flag{60bb3bfaf703e0fa36730ab70e115bd7}`**
 
 ---
 
@@ -678,7 +734,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/VB-flag.png)
 
-<font color="green"> **flag{ed81d24958127a2adccfb343012cebff}** </font>
+Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
 
 ---
 ---
@@ -708,7 +764,7 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     ![Alt text](sources/WamI-flag.png)
 
-<font color="green"> **flag{b11a3f0ef4bc170ba9409c077355bba2)** </font>
+Answer: **`flag{b11a3f0ef4bc170ba9409c077355bba2)`**
 
 ---
 ---
@@ -747,8 +803,133 @@ Attachments: [zerion](https://huntress.ctf.games/files/3140c2090a65b4a4810f9090e
 
     * It's also a Rick-roll, but we still got the flag!
 
-<font color="green"> **flag{93671c2c38ee872508770361ace37b02}** </font>
+Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
 
+---
+---
+
+## LOLZ Challenges
+
+![Alt text](sources/lolz2-challenge.png)
+
+### lolz#2 | 0 points | 10/7/2023
+
+> 籖ꍨ穉鵨杤𒅆象𓍆穉鵨詌ꍸ穌橊救硖穤歊晑硒敤睊ꉑ硊ꉤ晊ꉑ硆詤橆赑硤ꉑ穊赑硤詥楊ꉑ睖ꉥ橊赑睤ꉥ杊𐙑硬ꉒ橆𐙑硨穒祊ꉑ硖詤桊赑硤詥晊晑牙
+
+> ----- disclaimers (unrelated to the challenge) -----
+>
+> Discussion of this challenge is allowed in the thread #rejected-challenges.
+>
+> There are no points associated with this challenge, this is just for the lolz and bragging rights. No hints or help will be given. Brute force is not the answer here. This challenge (and all lolz challenges) may leave you with walking away saying "well that was some BS."
+
+**Solution Walkthrough**
+
+1. The characters used in this challenge are similar to those in `BaseFFFF+1`. Let's try decoding with the [Base65536 Decode Online Tool](https://www.better-converter.com/Encoders-Decoders/Base65536-Decode)
+
+    * Output:
+
+        >VGhlIEhhd2FpaWFuIEhhLUxlLEJ5Q0VCdEJ6Q1RCd0JBQkJCdkJ1QkFCdUF5QXdCQkJEQXdCeUJ4QkVBekJ5QXdBekJ2QnlCRkF5QnhCREJDQkVCdUJ3QXdCeUJ1Q1Y=
+
+2. This looks like valid base64, let's decode with CyberChef
+
+    * Output: 
+
+        > The Hawaiian Ha-Le,
+        ByCEBtBzCTBwBABBBvBuBABuAyAwBBBDAwByBxBEAzByAwAzBvByBFAyBxBDBCBEBuBwAwByBuCV
+
+3. Getting closer. There are consistent shift distances and character counts on this output that help identify a starting point to the cipher. All of the flags so far have been `38` characters in length. This one is `76`, indicating that there is a 2/1 ratio. Based on this hypothesis, we can assume that:
+
+        By = f
+        CE = l
+        Bt = a
+        Bz = g
+        CT = {
+        CV = }
+
+4. We're in luck with consecutive letters: `By = f and Bz = g` along with the fact that `CT` -> `CV` skips `CU`, because if we reference the ASCII table, that would be the pipe symbol `|`.
+
+    ![Alt text](sources/lolz2-ascii.png)
+
+5. Now that we have the beginning and ending positions with a consistent pattern, we can use that knowledge to create a key.
+
+        / - Av    C - BP    W - Bj    k - CD    
+        0 - Aw    D - BQ    X - Bk    l - CE    
+        1 - Ax    E - BR    Y - Bl    m - CF    
+        2 - Ay    F - BS    Z - Bm    n - CG    
+        3 - Az    G - BT    [ - Bn    o - CH    
+        4 - BA    H - BU    \ - Bo    p - CI    
+        5 - BB    I - BV    ] - Bp    q - CJ    
+        6 - BC    J - BW    ^ - Bq    r - CK    
+        7 - BD    K - BX    _ - Br    s - CL    
+        8 - BE    L - BY    ` - Bs    t - CM    
+        9 - BF    M - BZ    a - Bt    u - CN    
+        : - BG    N - Ba    b - Bu    v - CO    
+        ; - BH    O - Bb    c - Bv    w - CP    
+        < - BI    P - Bc    d - Bw    x - CQ    
+        = - BJ    Q - Bd    e - Bx    y - CR    
+        > - BK    R - Be    f - By    z - CS    
+        ? - BL    S - Bf    g - Bz    { - CT    
+        @ - BM    T - Bg    h - CA    | - CU    
+        A - BN    U - Bh    i - CB    } - CV    
+        B - BO    V - Bi    j - CC    ~ - CW
+
+6. Replace each instance of ciphetext with the corresponding plain text to reveal the flag    
+
+Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
+
+**Reference**
+
+* Challenge Source Code
+
+    ```JavaScript
+    function intToBase52(num) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let encoded = '';
+        
+        for (let i = 0; i < 2; i++) {
+            encoded = chars[num % 52] + encoded;
+            num = Math.floor(num / 52);
+        }
+
+        return encoded;
+    }
+    ```
+
+---
+
+### lolz#3 | 0 points | 10/9/2023
+
+![Alt text](sources/lolz3-challenge.png)
+
+> ----- disclaimers (unrelated to the challenge) -----
+>
+> Discussion of this challenge is allowed in the thread `#rejected-challenges`.
+>
+> There are no points associated with this challenge, this is just for the lolz and bragging rights. No hints or help will be given. Brute force is not the answer here. This challenge (and all lolz challenges) may leave you with walking away saying "well that was some BS."
+>
+> Attachments: [bops_lang.wav](https://huntress.ctf.games/files/2c79c04e2ea9b917cad95e5d89d1b25a/bops_lang.wav)
+
+1. Leads on this challenge so far:
+    * Song: `Awitin Mo, Isasayaw KO` by `VST & Company`
+    * Track Title Translation: `"You Sing and I'll Dance"`
+    * Forensic Attempts:
+        ```bash
+        steghide --extract -sf bops_lang.wav    #no password
+        ```
+
+        ![Alt text](sources/lolz3-steghide.png)
+
+        ```bash
+        cat steganopayload48716.txt
+        ```
+
+        ![Alt text](sources/lolz3-stegpayload.png)
+
+        * Filipino translation: `Pakitaan mo ng pagmamahal si Rick` | `Show Rick some love`
+
+    * Useful Steghide Online Tool: https://futureboy.us/stegano/decinput.html
+
+---
 ---
 
 * Still need to add writeups for:

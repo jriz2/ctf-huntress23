@@ -487,13 +487,11 @@ Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
 >
 > Download the file(s) below. Attachments: [snake_eater.7z](https://huntress.ctf.games/files/f33ff9480892eaee7c9ac8c56871f3cd/snake_eater.7z?)
 
-
-
 **Static Analysis Walkthrough** -- *Unsuccessful*
 
-*Initial triage with `binwalk`, `strings`, and `Ghidra` were unsuccessful didn't provide any immediate clues to follow.*
+*Initial triage with `binwalk`, `strings`, and `Ghidra` didn't provide any immediate clues to follow.*
 
-1. The `snake_eater.exe` icon is still the default image for PyInstaller, a tool used to bundle a Python application as a Portable Executable (.exe) file. Let's try to reverse the process to obtain the original Python script.
+1. The `snake_eater.exe` icon is still the default image for [PyInstaller](https://pyinstaller.org/en/stable/), a tool used to bundle a Python application as a Portable Executable (.exe) file. Let's try to reverse the process and obtain the original Python script.
 
     ![Alt text](sources/SE-icon.png)
 
@@ -510,16 +508,17 @@ Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
     ![Alt text](sources/SE-unreadable.png)
 
 
-4. Using [`pycdc`](https://github.com/extremecoders-re/decompyle-builds/releases), we can disassemble the byte-code. Move `pycdc.exe` and `snake_eater.pyc` into the same directory and run `pycdc.exe` passing the output to a txt file
-    ```cmd
-    .\pycdc.exe .\snake_eater.pyc > snake_eater.txt
-    ```
+4. Using [`pycdc`](https://github.com/extremecoders-re/decompyle-builds/releases), we can disassemble the byte-code. 
+    * Move `pycdc.exe` and `snake_eater.pyc` into the same directory and run `pycdc.exe` passing the output to a txt file
+        ```cmd
+        .\pycdc.exe .\snake_eater.pyc > snake_eater.txt
+        ```
 
-4. The byte-code has been disassembled, but the contents were obfuscated with [`Pyarmor`](https://wiki.python.org/moin/Pyarmor) and are still unreadable.
+4. The byte-code has been disassembled, but the contents have been obfuscated wth [`Pyarmor`](https://wiki.python.org/moin/Pyarmor)
 
     ![Alt text](sources/SE-pyarmor.png)
 
-5. I was unsuccessful in finding a way to de-obfuscate the script further. I decided to move on to Dynamic Analysis.
+5. I was ultimately unsuccessful in finding a way to de-obfuscate the script further. I decided to move on to Dynamic Analysis.
 
 **Dynamic Analysis Walkthrough**
 
@@ -530,7 +529,7 @@ Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
     2. Launch `snake_eater.exe`
     3. After a few seconds, press `CTRL + E` to pause monitoring
         * *(this will speed up our filtering and query results)*
-    3. Open Process Tree
+    3. Open the Process Tree
         1. Select the `snake_eater.exe` process on the left-hand side
         2. Click on `Go To Event`
         3. Click on `Close`
@@ -541,7 +540,7 @@ Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
             ![Alt text](sources/SE-filter.png)
 
 3. Back in the main process log window, we can start scrolling down to get an idea of everything happening while snake_eater.exe was running. Eventually we'll come across some file operations that contain the flag. 
-    * We could speed this up even more by doing a CTRL+F for `flag{`
+    * *We could speed this up even more by doing a CTRL+F for `flag{`*
 
     ![Alt text](sources/SE-flag.png)
 
@@ -1001,7 +1000,7 @@ Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
 
 ---
 
-### lolz#3 | 0 points | 10/9/2023
+### lolz#3 | 0 points | 10/9/2023 -- *Incomplete*
 
 ![Alt text](sources/lolz3-challenge.png)
 
@@ -1039,7 +1038,3 @@ Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
 * Still need to add writeups for:
     * Chicken Wings (wingdings)
     * Layered Security (GIMP)
-
-
-pip install pydumpck
-pydumpck

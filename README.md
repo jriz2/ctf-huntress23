@@ -474,6 +474,80 @@ Answer: **`flag{dbfe5f755a898ce5f2088b0892850bf7}`**
 Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
 
 ---
+
+### Snake Eater | 50 points | 10/12/2023
+
+![Alt text](sources/SE-challenge.png)
+
+> Hey Analyst, I've never seen an executable icon that looks like this. I don't like things I'm not familiar with. Can you check it out and see what it's doing?
+>
+> Archive password: `infected`
+>
+> *NOTE, this challenge is based off of a real malware sample. Windows Defender will probably identify it as malicious. It is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Download the file(s) below. Attachments: [snake_eater.7z](https://huntress.ctf.games/files/f33ff9480892eaee7c9ac8c56871f3cd/snake_eater.7z?)
+
+
+
+**Static Analysis Walkthrough** -- *Unsuccessful*
+
+*Initial triage with `binwalk`, `strings`, and `Ghidra` were unsuccessful didn't provide any immediate clues to follow.*
+
+1. The `snake_eater.exe` icon is still the default image for PyInstaller, a tool used to bundle a Python application as a Portable Executable (.exe) file. Let's try to reverse the process to obtain the original Python script.
+
+    ![Alt text](sources/SE-icon.png)
+
+2. Using [`pyinstractor`](https://github.com/extremecoders-re/pyinstxtractor), extract the contents of snake_eater.exe.
+
+    ```cmd
+    python pyinstractor.py
+    ```
+
+    ![Alt text](sources/SE-pyinstractor.png)
+
+3. If we try opening the extracted `snake_eater.pyc` file, the contents are still in byte-code and unreadable. 
+
+    ![Alt text](sources/SE-unreadable.png)
+
+
+4. Using [`pycdc`](https://github.com/extremecoders-re/decompyle-builds/releases), we can disassemble the byte-code. Move `pycdc.exe` and `snake_eater.pyc` into the same directory and run `pycdc.exe` passing the output to a txt file
+    ```cmd
+    .\pycdc.exe .\snake_eater.pyc > snake_eater.txt
+    ```
+
+4. The byte-code has been disassembled, but the contents were obfuscated with [`Pyarmor`](https://wiki.python.org/moin/Pyarmor) and are still unreadable.
+
+    ![Alt text](sources/SE-pyarmor.png)
+
+5. I was unsuccessful in finding a way to de-obfuscate the script further. I decided to move on to Dynamic Analysis.
+
+**Dynamic Analysis Walkthrough**
+
+1. Download and install the [Sysinternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/)
+
+2. Steps to analyze using [Procmon](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon):
+    1. Launch `Procmon64.exe`
+    2. Launch `snake_eater.exe`
+    3. After a few seconds, press `CTRL + E` to pause monitoring
+        * *(this will speed up our filtering and query results)*
+    3. Open Process Tree
+        1. Select the `snake_eater.exe` process on the left-hand side
+        2. Click on `Go To Event`
+        3. Click on `Close`
+        ![Alt text](sources/SE-proctree.png)
+    4. Open the Filter window and apply common [malware analaysis filters](https://github.com/nasbench/procmon-malware-analysis-filters) to minimize the output.
+        * ***Pro Tip:** Filter on the process name for `snake_eater.exe` to narrow things down even more!*
+
+            ![Alt text](sources/SE-filter.png)
+
+3. Back in the main process log window, we can start scrolling down to get an idea of everything happening while snake_eater.exe was running. Eventually we'll come across some file operations that contain the flag. 
+    * We could speed this up even more by doing a CTRL+F for `flag{`
+
+    ![Alt text](sources/SE-flag.png)
+
+Answer: **`flag{d1343a2fc5d8427801dd1fd417f12628}`**
+
+---
 ---
 
 ## **FORENSICS Challenges**
@@ -808,6 +882,34 @@ Answer: **`flag{b11a3f0ef4bc170ba9409c077355bba2)`**
 Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
 
 ---
+
+### Operation Not Found | 50 points | 10/12/2023
+
+![Alt text](sources/ONF-challenge.png)
+
+> In the boundless web of data, some corners echo louder than others, whispering tales of innovation, deep knowledge, and fierce competition. On the lush landscapes of https://osint.golf/, a corner awaits your discovery... where intellect converges with spirit, and where digital foundations stand alongside storied arenas.
+>
+>This is the `chall1` challenge for the "HuntressCTF2023" challenges It's a lot like Geoguesser if you have ever played :)
+>
+> * Navigate to OSINT Golf and select the chall1 challenge.
+> * You will see an interface similar to Google Street View, where you can look around and zoom in on your surroundings. Try and determine your location on the map of the earth!
+> * Move your mouse over the minimap in the bottom-right corner, and scroll to zoom or click and hold to pan around the map.
+> * Click and place your pin-marker on the map where you believe your exact location is. **The accuracy radius is 200 meters**.
+> * Click Submit. If you are incorrect, it will say "not here" on the top left. If you are correct, your flag will be displayed in the top-left corner.
+> * Copy and paste the flag value into the input box below and submit it to solve this challenge!
+
+* Crosland Tower - Georgia Tech University
+
+    ![Alt text](sources/ONF-chall1.png)
+
+    * chall1 Answer: **`flag{c46b7183c9810ec4ddb31b2fdc6a914c}`**
+
+* Rick Roll Bridge
+
+    ![Alt text](sources/ONF-chall2.png)
+
+    * chall2 Answer: **`flag{fdc8cd4cff2c19e0d1022e78481ddf36}`**
+---
 ---
 
 ## LOLZ Challenges
@@ -937,3 +1039,7 @@ Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
 * Still need to add writeups for:
     * Chicken Wings (wingdings)
     * Layered Security (GIMP)
+
+
+pip install pydumpck
+pydumpck

@@ -558,15 +558,26 @@ Answer: **`flag{d1343a2fc5d8427801dd1fd417f12628}`**
 
 **Solution Walkthrough**
 
-1. Visiting the page in a browser, we see the directory structure and files within.
+1. Visiting the page in a browser, we can see the directory structure and files within.
 
     ![Alt text](sources/OD-dir.png)
 
-2. After manually exploring a few files on the site, we will want to employ an 
+2. After manually exploring a few files on the site, there are enough files and data that we will want to employ an automated method of finding the flag.
 
+3. Using wget, download all of the files into a directory
+    
+    ```bash
+    wget -r --user opendir --password opendir http://chal.ctf.games:30001/
+    ```
 
+4. Now, use a recursive grep to find the flag
+    ```bash
+    grep -r "flag{" .
+    ```
 
-wget -r --user opendir --password opendir http://chal.ctf.games:30001/
+    ![Alt text](sources/OD-flag.png)
+
+Answer: **`flag{9eb4ebf423b4e5b2a88aa92b0578cbd9}`**
 
 ---
 ---

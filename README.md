@@ -858,19 +858,19 @@ Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
 
 **Solution Walkthrough**
 
-1. Download and extract the attachment to reveal a file without an extension. run `file` to learn more
+1. Download and extract the attachment to reveal a file without an extension. Run `file` to discover that this is supposed to be a .zip archive
 
     ![Alt text](sources/TR-file.png)
 
-2. Rename the file to add the .zip extension and try to extract the contents. Notice that we are getting a bad offset error.
+2. Rename the file to add the .zip extension and try to extract the contents. Notice that we are getting a bad offset error when using the command line.
 
     ![Alt text](sources/TR-unzip1.png)
 
-3.  If we try to extract in the GUI, we can see that the `[Content_Types].xml` file did not extract properly.
+3.  If we try to extract in the GUI, we get another error, but can also see that the `[Content_Types].xml` file did not extract properly.
 
     ![Alt text](sources/TR-unzip2.png)
 
-4. Taking a look at the file header based on the error we just saw, we can see that it doesn't have the correct magic bytes for a zip file. 
+4. Taking a look at the file header based on the error we just saw, we can see that it doesn't have the correct magic bytes for a .zip file. 
     ```bash
     hexdump -C tragedy_redux.zip | head -10    #view header
     ```
@@ -884,11 +884,6 @@ Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
     ```
 
     ![Alt text](sources/TR-header2.png)
-
-
-
-
-    https://en.wikipedia.org/wiki/Office_Open_XML_file_formats
 
 6. A quick Google search on the file names in the zipped folder lets us know that we are working [Open XML File Format](https://en.wikipedia.org/wiki/Office_Open_XML_file_formats). We'll need to move our zip file over to Windows where we can open it in Microsoft Word for further analysis We can do that in the lab environment with a Python Simple HTTP Server:
     ```bash
@@ -905,6 +900,8 @@ Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
 
 10. Execute the macro with the breakpoint to reveal a base64 encoded stored in teh Nuts & Oatmilk variables.
 
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/c538872f-8a68-4e24-83a5-95a8bdeb4238
+    
     <video src="sources/TR-debug.mp4" controls title="Title"></video>
 
 12. Decode the base64 encoded string for the flag
@@ -1070,7 +1067,9 @@ Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
     * Locate the first CALL instruction, righ click on `echoBinSafe` and select "Patch Instruction"
     * Input the address value we captured above for `printFlag__Main_6` and press enter.
     * Select File > Export Program, change the format to "Original File" and save.
-
+      
+        https://github.com/jriz2/ctf-huntress23/assets/108373636/9845a476-dcad-494f-b8a8-100ce1374947
+      
         <video src="sources/RPP-flag.mp4" controls title="Title"></video>
 
 5. Locate and launch the newly patched .exe to reveal the flag.

@@ -547,6 +547,28 @@ Answer: **`flag{9b5c4313d12958354be6284fcd63dd26}`**
 Answer: **`flag{d1343a2fc5d8427801dd1fd417f12628}`**
 
 ---
+
+## Opendir | 50 points | 10/13/2023
+
+![Alt text](sources/OD-challenge.png)
+
+> A threat actor exposed an open directory on the public internet! We could explore their tools for some further intelligence. Can you find a flag they might be hiding?
+>
+> *NOTE: This showcases genuine malware samples found a real opendir. For domain reputation purposes, this is behind Basic Authentication with credentials: opendir:opendir*
+
+**Solution Walkthrough**
+
+1. Visiting the page in a browser, we see the directory structure and files within.
+
+    ![Alt text](sources/OD-dir.png)
+
+2. After manually exploring a few files on the site, we will want to employ an 
+
+
+
+wget -r --user opendir --password opendir http://chal.ctf.games:30001/
+
+---
 ---
 
 ## **FORENSICS Challenges**
@@ -812,6 +834,99 @@ Answer: **`flag{60bb3bfaf703e0fa36730ab70e115bd7}`**
 Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
 
 ---
+
+### Tragedy Redux | 50 points | 10/15/2023
+
+![Alt text](sources/TR-challenge.png)
+
+> We found this file as part of an attack chain that seemed to manipulate file contents to stage a payload. Can you make any sense of it?
+>
+> Archive password: infected
+>
+> Download the file(s) below. Attachments: [tragedy_redux.7z](https://huntress.ctf.games/files/30a51f59aeb8f4b9b2a2ea395094b1df/tragedy_redux.7z)
+
+**Solution Walkthrough**
+
+1. Download and extract the attachment to reveal a file without an extension. run `file` to learn more
+
+    ![Alt text](sources/TR-file.png)
+
+2. Rename the file to add the .zip extension and try to extract the contents. Notice that we are getting a bad offset error.
+
+    ![Alt text](sources/TR-unzip1.png)
+
+3.  If we try to extract in the GUI, we can see that the `[Content_Types].xml` file did not extract properly.
+
+    ![Alt text](sources/TR-unzip2.png)
+
+4. Taking a look at the file header based on the error we just saw, we can see that it doesn't have the correct magic bytes for a zip file. 
+    ```bash
+    hexdump -C tragedy_redux.zip | head -10    #view header
+    ```
+    
+    ![Alt text](sources/TR-header.png)
+
+
+5. Let's go ahead and update that to the proper `PK..` header. *Reference: [File Magic Numbers](https://gist.github.com/leommoore/f9e57ba2aa4bf197ebc5)*
+    ```bash
+    hexedit tragedy_redux.zip                  #make header updates
+    ```
+
+    ![Alt text](sources/TR-header2.png)
+
+
+
+
+    https://en.wikipedia.org/wiki/Office_Open_XML_file_formats
+
+6. A quick Google search on the file names in the zipped folder lets us know that we are working [Open XML File Format](https://en.wikipedia.org/wiki/Office_Open_XML_file_formats). We'll need to move our zip file over to Windows where we can open it in Microsoft Word for further analysis We can do that in the lab environment with a Python Simple HTTP Server:
+    ```bash
+    python -m http.server 9000
+    ```
+
+7. With the tragedy_redux.zip file open in Microsoft Word, we can go to View > Macros > Step Into to start debugging the embedded macro in this file.
+
+8. After attempting to run the Macro a few times, nothing is happening. We need to adjust the operator from <> (not equal) to = (equal) within the "If" statement in the Tragedy() function so that it won't try to detect the file name and execute.
+
+    ![Alt text](sources/TR-operator.png)
+
+9. After exploring how each function is chained together and seeing that the output isn't saved when the program ends, we can set a breakpoint at the end of the `Nuts()` function to investigate further. Enable the Locals page by clicking on View > Locals Window to see values stored in memory as the macro executes.
+
+10. Execute the macro with the breakpoint to reveal a base64 encoded stored in teh Nuts & Oatmilk variables.
+
+    <video src="sources/TR-debug.mp4" controls title="Title"></video>
+
+12. Decode the base64 encoded string for the flag
+    ```PowerShell
+    $base64String = "JGZsYWc9ImZsYWd7NjNkY2M4MmMzMDE5Nzc2OGY0ZDQ1OGRhMTJmNjE4YmN9Ig=="
+    [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($base64String))
+    ```
+
+    ![Alt text](sources/TR-flag.png)
+
+Answer: **`flag{63dcc82c30197768f4d458da12f618bc}`**
+
+---
+
+### Rogue Inbox | 50 points | 10/16/2023
+
+![Alt text](sources/RI-challenge.png))
+
+> You've been asked to audit the Microsoft 365 activity for a recently onboarded as a customer of your MSP.
+> 
+> Your new customer is afraid that Debra was compromised. We received logs exported from Purview... can you figure out what the threat actor did? It might take some clever log-fu!
+> 
+> Download the file(s) below. Attachments: [purview.csv](https://huntress.ctf.games/files/d6759f8cca03a130ccd0f4c53bae1be0/purview.csv)
+
+**Solution Walkthrough**
+
+1. Open the CSV file in excel to get a complete view of the file. While doing this, I noticed the pattern for the flag in some mailbox rules created by the `DebraB` user. I typed it in manually and didn't pursue any futher log splicing.
+
+    ![Alt text](sources/RI-flag.png)
+
+Answer: **`flag{24c4230fa7d50eef392b2c850f74b0f6}`**
+
+---
 ---
 
 ## **OSINT Challenges**
@@ -908,14 +1023,136 @@ Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
     ![Alt text](sources/ONF-chall2.png)
 
     * chall2 Answer: **`flag{fdc8cd4cff2c19e0d1022e78481ddf36}`**
+
+---
+
+### Rock, Paper, Psychic | 50 points | 10/15/2023
+
+![Alt text](sources/RPP-challenge.png)
+
+> Wanna play a game of rock, paper, scissors against a computer that can read your mind? Sounds fun, right?
+> 
+> NOTE: this challenge binary is not malicious, but Windows Defender will likely flag it as malicious anyway. Please don't open it anywhere that you don't want a Defender alert triggering.
+> 
+> Download the file(s) below. Attachments: [rock_paper_psychic.7z](https://huntress.ctf.games/files/9d9eea8209f78320e9bcdb39b25838f5/rock_paper_psychic.7z)
+
+**Solution Walkthrough**
+
+1. Extract the file and try to interact with the program.
+    * There doesn't seem to be a way to win by playing normally.
+    * Basic fuzzing with AAAAAs doesn't cause a crash. 
+    * It doesn't initially appear that we can brute force our way to the flag either.
+    * Since the program tells us their name is `Patch`, we can look at patching the binary provides any further progress toward the flag.
+
+        ![Alt text](sources/RPP-run.png))
+
+2. Open the program in Ghidra and do a search for strings. We have some clues to where a function for the flag might be. We can select that line and it will take us to the address in memory
+
+    ![Alt text](sources/RPP-strings.png)
+
+3. With the "You won" string selected, we can look for the address to the owning function
+
+4. To patch the program:
+    * Navigate to the function that contains the "You won" string by scrolling up to the XREF, it is called `playerWins_Main_10`. Double click to go to its address.
+    * Within `playerWins_Main_10`, there is a CALL to `echoBinSafe`, which is what will launch itself. But, notice the CALL below to `printFlag__Main_6`. Take note of its address `004169e0`.
+    * Return to the location of the `main` function.
+    * Locate the first CALL instruction, righ click on `echoBinSafe` and select "Patch Instruction"
+    * Input the address value we captured above for `printFlag__Main_6` and press enter.
+    * Select File > Export Program, change the format to "Original File" and save.
+
+        <video src="sources/RPP-flag.mp4" controls title="Title"></video>
+
+5. Locate and launch the newly patched .exe to reveal the flag.
+
+    ![Alt text](sources/RPP-flag.png)
+
+Answer: **`flag{35bed450ed9ac9fcb3f5f8d547873be9}`**
+
+---
+
+### M Three Sixty Five | 200 points | 10/16/2023
+
+![Alt text](sources/M365-challenge.png)
+
+**Environment Login**
+
+1. In order to connect, I had to use the IP address of the management host *(vs. the hostname)*.
+    1. Determine IP address
+        ```bash
+        ping chal.ctf.games
+        ```
+
+        ![Alt text](sources/M354-ping.png)
+
+    2. SSH directly to the IP with provided credentials `U: user P: userpass` and the randomly generated port number when the instance launched
+        ```bash
+        ssh user@34.123.197.237 -p 31744
+        ```
+
+        ![Alt text](sources/M365-aadinternals.png)
+
+2. With this being an [AAD Internals](https://aadinternals.com/) jump host, we can now use commands from this toolset to reveal each flag.
+
+**M365 - General Info**
+
+> Welcome to our hackable M365 tenant! Can you find any juicy details, like perhaps the street address this organization is associated with?
+
+1. Command to retrieve the flag:
+    ```PowerShell
+    Get-AADIntTenantDetails
+    ```
+
+    ![Alt text](sources/M365-streetaddress.png)
+
+Answer: **`flag{dd7bf230fde8d4836917806aff6a6b27}`**
+
+**M365 - Conditional Access**
+
+> This tenant looks to have some odd Conditional Access Policies. Can you find a weird one?
+
+1. Command to retrieve the flag:
+    ```PowerShell
+    Get-AADIntConditionalAccessPolicies
+    ```
+
+    ![Alt text](sources/M365-conditional.png)
+
+Answer: **`flag{d02fd5f79caa273ea535a526562fd5f7}`**
+
+**M365 - Teams**
+
+> We observed saw some sensitive information being shared over a Microsoft Teams message! Can you track it down?
+
+1. Command to retrieve the flag:
+    ```PowerShell
+    Get-AADIntTeamsMessages
+    ```
+
+    ![Alt text](sources/M365-teams.png)
+
+Answer: **`flag{f17cf5c1e2e94ddb62b98af0fbbd46e1}`**
+
+**M365 - The President**
+
+> One of the users in this environment seems to have unintentionally left some information in their account details. Can you track down The President?
+
+1. Command to retrieve the flag:
+    ```PowerShell
+    Get-AADIntUsers      #scroll for President title
+    ```
+    
+    ![Alt text](sources/M365-president.png)
+
+Answer: **`flag{1e674f0dd1434f2bb3fe5d645b0f9cc3}`**
+
 ---
 ---
 
 ## LOLZ Challenges
 
-![Alt text](sources/lolz2-challenge.png)
-
 ### lolz#2 | 0 points | 10/7/2023
+
+![Alt text](sources/lolz2-challenge.png)
 
 > 籖ꍨ穉鵨杤𒅆象𓍆穉鵨詌ꍸ穌橊救硖穤歊晑硒敤睊ꉑ硊ꉤ晊ꉑ硆詤橆赑硤ꉑ穊赑硤詥楊ꉑ睖ꉥ橊赑睤ꉥ杊𐙑硬ꉒ橆𐙑硨穒祊ꉑ硖詤桊赑硤詥晊晑牙
 
@@ -1034,7 +1271,3 @@ Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
 
 ---
 ---
-
-* Still need to add writeups for:
-    * Chicken Wings (wingdings)
-    * Layered Security (GIMP)

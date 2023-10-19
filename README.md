@@ -965,6 +965,67 @@ Answer: **`flag{24c4230fa7d50eef392b2c850f74b0f6}`**
 Answer: **`flag{b11a3f0ef4bc170ba9409c077355bba2)`**
 
 ---
+
+## Texas Chainsaw Massacre: Tokyo Drift | 50 points | 10.18/2023
+
+![Alt text](sources/TCM-challenge.png)
+
+> Ugh! One of our users was trying to install a Texas Chainsaw Massacre video game, and installed malware instead. Our EDR detected a rogue process reading and writing events to the Application event log. Luckily, it killed the process and everything seems fine, but we don't know what it was doing in the event log.
+>
+> The EVTX file is attached. Are you able to find anything malicious?
+>
+> Archive password: `infected`
+>
+> Download the file(s) below. Attachments: [ChainsawMassacre.zip](https://huntress.ctf.games/files/cc6cb98221b7136288f8b4b7f48ec48d/ChainsawMassacre.zip)
+
+**Solution Walkthrough**
+
+1. After extracting the .evtx file, let's use `EvtxECmd` to process the log file into a .csv, then open with `TimelineExplorer` from [Eric Zimmerman's Forensic Tools](https://ericzimmerman.github.io/#!index.md).
+    ```PowerShell
+    'C:\huntress-ctf\tools\EZ Tools\net6\EvtxeCmd\EvtxECmd.exe' -f '.\Application Logs.evtx' --csv .
+    ```
+
+    ![Alt text](sources/TCM-csv.png)
+
+2. Open the newly created .csv file in `TimelineExplorer`
+
+3. By analyzing the data, eventually we come across `Event ID 1337`. Exploring further, the payload has a large encoded string of hex characters. 
+
+    ![Alt text](sources/TCM-eventid.png)
+
+    ![Alt text](sources/TCM-hex.png)
+
+4. We can use the "From Hex" recipe in CyberChef to decode to ascii,and reveal some obfuscated PowerShell syntax.
+
+    ![Alt text](sources/TCM-hex-decode.png)
+
+5. We can use a text editor to help run and decode the message for us. In this first command, we need to remove the pipe "|" symbol and everything after to output the results to the console.
+
+    ![Alt text](sources/TCM-ps1.png)
+
+6. The next iteration of encoded text is a little easier to read. If we look closely at the bottom line, most of the string has been reversed. If we change the `noIsseRpXe-ekovni` function to `tsoH-etirW`, we can output our results to the console again.
+
+    ![Alt text](sources/TCM-ps2.png)
+
+7. With this output, it is still encoded PowerShell syntax, but a little easier to read. We can use the `Write-Host` cmdlet again to output the results to the console.
+
+    ![Alt text](sources/TCM-ps3.png)
+
+8. Success! Now we have human-readable syntax. We can cut out the try/catch block and clean up the command to reveal the flag... *and a nice easter egg*
+    ```PowerShell
+    $5GMLW = (Resolve-DnsName eventlog.zip -Type txt | ForEach-Object { $_.Strings })
+    if ($5GMLW -match '^[-A-Za-z0-9+/]*={0,3}$') { 
+        Write-Output([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($5GMLW)))
+    }
+    ```
+
+    ![Alt text](sources/TCM-flag.png)
+
+Answer: **`flag{409537347c2fae01ef9826c2506ac660}`**
+
+*easter egg: https://youtu.be/561nnd9Ebss?t=16*
+
+---
 ---
 
 ## **MISCELLANEOUS Challenges**
@@ -983,16 +1044,14 @@ Answer: **`flag{b11a3f0ef4bc170ba9409c077355bba2)`**
 
     ![Alt text](sources/IWLYD-url.png)
 
-
-
-1. Port scan the ip using `nmap`
+2. Port scan the ip using `nmap`
     ```bash
     nmap -Pn -sT 155.138.162.158 -p- -sV 
     ```
 
     ![Alt text](sources/IWLYD-scan.png)
     
-2. Our scan revealed some services running on non-standard and high port numbers. Since these aren't commonly used, let's do a banner grab with `netcat` to get the flag.
+3. Our scan revealed some services running on non-standard and high port numbers. Since these aren't commonly used, let's do a banner grab with `netcat` to get the flag.
     ```bash
     nc 155.138.162.158 8888
     ```

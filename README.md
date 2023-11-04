@@ -120,7 +120,7 @@ Answer: **`flag{julius_in_a_reflection}`**
 
     Video Walkthrough:
 
-    https://github.com/jriz2/ctf-huntress23/assets/108373636/43157070-b4b9-4fd1-88fe-8ae25ae941c6
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/d6bb87fc-316a-4e57-b04f-1fc586f1b3e5
 
 Answer: **`flag{03e8ba07d1584c17e69ac95c341a2569}`**
 
@@ -260,9 +260,7 @@ Answer: **`flag{196a71490b7b55c42bf443274f9ff42b}`**
 
     * BurpSuite Video Walkthrough:
 
-        <video src="sources/Baking-video.mp4" controls title="Title"></video>
-        
-        https://github.com/jriz2/ctf-huntress23/assets/108373636/784ffa1d-4428-488d-86f9-04aa3fb6b2e4
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/0826edad-a6b2-4a0c-a727-391cf49a40fd
 
 Answer: **`flag{c36fb6ebdbc2c44e6198bf4154d94ed4}`**
 
@@ -1128,11 +1126,10 @@ Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
     * Locate the first CALL instruction, righ click on `echoBinSafe` and select "Patch Instruction"
     * Input the address value we captured above for `printFlag__Main_6` and press enter.
     * Select File > Export Program, change the format to "Original File" and save.
-      
-        https://github.com/jriz2/ctf-huntress23/assets/108373636/9845a476-dcad-494f-b8a8-100ce1374947
-      
-        <video src="sources/RPP-flag.mp4" controls title="Title"></video>
 
+
+   https://github.com/jriz2/ctf-huntress23/assets/108373636/9845a476-dcad-494f-b8a8-100ce1374947
+      
 5. Locate and launch the newly patched .exe to reveal the flag.
 
     ![Alt text](sources/RPP-flag.png)

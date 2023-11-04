@@ -1125,7 +1125,7 @@ Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
     * Input the address value we captured above for `printFlag__Main_6` and press enter.
     * Select File > Export Program, change the format to "Original File" and save.
 
-   https://github.com/jriz2/ctf-huntress23/assets/108373636/9845a476-dcad-494f-b8a8-100ce1374947
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/d06c96bb-2b9e-4a17-a6e7-2b38eeb9b08d
       
 5. Locate and launch the newly patched .exe to reveal the flag.
 

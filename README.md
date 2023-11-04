@@ -4,6 +4,8 @@ Team Name: **D2CTF** | Username: **SlowMo7ion**
 
 ![Alt text](sources/ctf-banner.png)
 
+![Alt text](sources/final-score.png)
+
 ---
 
 ## **WARMUPS Challenges**
@@ -1340,3 +1342,233 @@ Answer: **`flag{d45cb4b20570fe83f03cf92e768bd0fb}`**
 
 ---
 ---
+
+## UNTOUCHED CHALLENGES -- *the ones I didn't get to*
+
+### Bad Memory | 50 points | Forensics
+
+![Alt text](sources/BM-challenge.png)
+
+> A user came to us and said they forgot their password. Can you recover it? The flag is the MD5 hash of the recovered password wrapped in the proper flag format.
+>
+> Download the file below. *Note, this is a large 600MB file and may take some time to download:* [image.zip](https://johnhammond.org/static/misc/image.zip)
+
+---
+
+### BlackCat | 50 points | Malware
+
+![Alt text](sources/BC-challenge.png)
+
+> We've been hit by the infamous BlackCat Ransomware Group! We need you to help restore the encrypted files. Please help! My favorite rock got encrypted and I'm a wreck right now!
+> 
+> Archive password: `infected`
+> 
+> *NOTE: This challenge is based off of a real malware sample. Windows Defender will probably identify it as malicious. It is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Download the file(s) below: [blackcat.7z](https://huntress.ctf.games/files/ebc469531addc6435ed7308ae5a4021b/blackcat.7z)
+
+---
+
+### Snake Oil | 50 points | Malware
+
+![Alt text](sources/SO-challenge.png)
+
+>One of our workstations was exhibiting strange network communications... we found this binary that looked to be the culprit. Can you find anything suspicious?
+> 
+> Download the file(s) below: [snake-oil](https://huntress.ctf.games/files/cef67a6ce03bef4ea1dec6ea6cb7fad0/snake-oil)
+
+---
+
+### RAT | 50 points | Malware
+
+![Alt text](sources/RAT-challenge.png)
+
+> I was arguing with a co-worker on whether or not it is "Remote Access Tool" or "Remote Access Trojan", and he didn't agree with me, so I sent him this shady file ;)
+>
+> NOTE: Archive password: `infected`
+>
+> *NOTE: This challenge is based off of a real malware sample. We have done our best to "defang" the code, but out of abudance of caution it is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Download the file(s) below: [rat.7z](https://huntress.ctf.games/files/d0f1397aa6ad318a0befc60e38eec0ea/rat.7z)
+
+---
+
+#### Batchfuscation | 50 points | Malware
+
+![Alt text](sources/BF-challenge.png)
+
+> I was reading a report on past Trickbot malware, and I found this sample that looks a lot like their code! Can you make any sense of it?
+> 
+> Download the file below. [batchfuscation](https://huntress.ctf.games/files/d33e6c0bd5f7ae8e96fc1f53996d8ff1/batchfuscation)
+
+---
+
+### Spakfriend | 50 points | Malware -- *live challenge*
+
+![Alt text](sources/SF-challenge.png)
+
+> It seems like this website was compromised. We found this file that seems to be related... can you make any sense of these and uncover a flag?
+>
+> NOTE:
+    > * Archive password is `infected`
+    > * You will need access this service with HTTPS. Please use https:// as the URL schema rather than plain http://.
+    > * This website uses a self-signed certificate. The "Warning: connection not secure" message is expected and intended. You can continue on to the website.
+    > * *This challenge is based off of a real malware sample. We have done our best to "defang" the code, but out of abundance of caution it is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Press the Start button on the top-right to begin this challenge.
+> 
+> Attachments: [main.7z](https://huntress.ctf.games/files/ab6daa956413275d9ad461f09c4fd120/main.7z)
+
+---
+
+### Snake Eater II | 50 points | Malware
+
+![Alt text](sources/SE2-challenge.png)
+
+>Snake Eater II - Revenge of the Snake Eater
+>
+> The Threat Actor must have gotten word that you had no trouble dissecting Snake Eater. They said this one is a bit more... involved.
+>
+> Archive Password: `infected`
+>
+> *NOTE: This challenge is based off of a real malware sample. Windows Defender will probably identify it as malicious. It is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Download the file(s) below: [snake_eaterII.7z](https://huntress.ctf.games/files/1f0433f6d314bd5ba58e3826854a8dc3/snake_eaterII.7z)
+
+---
+
+### Thumb Drive | 50 points | Malware
+
+![Alt text](sources/TD-challenge.png)
+
+> People say you shouldn't plug in USB drives! But I discovered this neat file on one that I found in the parking lot...
+> 
+> *WARNING: Your antivirus solution may raise an alert (this is the 'Malware' category, after all). Please do not attempt this challenge without the usual caution you may take when analyzing malicious software.*
+> 
+> Download the file(s) below: [ADATA_128GB.lnk](https://huntress.ctf.games/files/9c2e09e8938353390ae451d3ff454d2f/ADATA_128GB.lnk)
+
+---
+
+### BlackCat II | 50 points | Malware
+
+![Alt text](sources/BC2-challenge.png)
+
+> Be advised analyst: BlackCat is back! And they're mad. Very mad. Help our poor user recover the images that they downloaded while browsing their favorite art site. Quickly!
+>
+> Archive password: `infected`
+>
+> *NOTE: this challenge is based off of a real malware sample. Windows Defender will probably identify it as malicious. It is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices. Password: infected*
+>
+> Download the file(s) below. [blackcatII.7z](https://huntress.ctf.games/files/ece4e5a78e5aaf81c9c06b0eed404215/blackcatII.7z)
+
+---
+
+### Crab Rave | 50 points | Malware
+
+![Alt text](sources/CR-challenge.png)
+
+> My biologist friend told me that everything eventually evolves into a crab-like form. I don't know if that's true but I guess malware authors got a head start on that evolution. To save you some time, I went ahead and found you the 10 hour extended version of [Crab Rave on YouTube](https://www.youtube.com/watch?v=-50NdPawLVY). You'll need it.
+>
+> So, here's the deal. This one is tough, so we're giving you a "Choose Your Own Adventure" challenge. Are you super confident with reverse engineering? Try **crab_rave_harder.7z**. Not so confident with RE? We gave you **crab_rave_easier.7z**.
+> 
+> Both have the same flag. Both do the same thing. If you solve one, you solve both. No matter which one you go with, it will be challenging. You got this.
+>
+> Archive password: `infected`
+>
+> *NOTE: This challenge is based off of a real malware sample. Windows Defender will probably identify it as malicious. It is strongly encouraged you only analyze this inside of a virtual environment separate from any production devices.*
+>
+> Download the file(s) below.[crap_rave_easier.7z](https://huntress.ctf.games/files/e82f4ccbe411aa5e7d5b3b1d13aadb83/crab_rave_easier.7z) | [crab_rave_harder.7z](https://huntress.ctf.games/files/4c8cea994073d394b58b8665ea6df914/crab_rave_harder.7z)
+
+---
+
+### PRESS PLAY ON TAPE | 50 points | Miscellaneous
+
+![Alt text](sources/PPoT-challenge.png)
+
+> While walking home through a dark alley you find an archaic 1980s cassette tape. It has "PRESS PLAY ON TAPE" written on the label. You take it home and play it on your old tape deck. It sounds awful. The noise made you throw your headphones to the floor immedately. You snagged a recording of it for analysis.
+>
+> *WARNING: The audio in this file is very loud and obnoxious. Please turn your volume way down before playing.*
+>
+> Download the file(s) below. [pressplayontape.wav](https://huntress.ctf.games/files/552fa2bbcfd655959c9948e0899f280e/pressplayontape.wav)
+
+---
+
+### Welcome to the Park | 50 points | Miscellaneous
+
+![Alt text](sources/WttP-challenge.png)
+
+>The creator of Jurassic Park is in hiding... amongst Mach-O files, apparently. Can you find him?
+>
+> Download the file(s) below. [welcomeToThePark.zip](https://huntress.ctf.games/files/ad85713f5710fe8c24c6e167e1100168/welcomeToThePark.zip)
+
+---
+
+### Discord Snowflake Scramble | 50 points | Miscellaneous
+
+![Alt text](sources/DSS-challenge.png)
+
+> Someone sent [message on a Discord server](https://discord.com/channels/1156647699362361364/1156648139516817519/1156648284237074552) which contains a flag! They did mention something about being able to embed a list of online users on their own website...
+>
+> Can you figure out how to join that Discord server and see the message?
+> 
+> *Note: Discord phone verification is NOT required for this challenge.*
+>
+> Connect here: https://discord.com/channels/1156647699362361364/1156648139516817519/1156648284237074552
+
+---
+
+### Operation Eradication | 50 points | Miscellaneous -- *live challenge*
+
+![Alt text](sources/OE-challenge.png)
+
+> Oh no! A ransomware operator encrypted an environment, and exfiltrated data that they will soon use for blackmail and extortion if they don't receive payment! They stole our data!
+>
+> Luckily, we found what looks like a configuration file, that seems to have credentials to the actor's storage server... but it doesn't seem to work. Can you get onto their server and delete all the data they stole!?
+> 
+> Download the file(s) below and press the Start button on the top-right to begin this challenge: [operation_eradication](https://huntress.ctf.games/files/7fd4bd123de04eb69bba898f6ecc1539/operation_eradication)
+
+---
+
+### MFAtague | 50 points | Miscellaneous -- *live challenge*
+
+![Alt text](sources/MFA-challenge.png)
+
+> We got our hands on an NTDS file, and we might be able to break into the Azure Admin account! Can you track it down and try to log in? They might have MFA set up though...
+>
+> Download the file(s) below and press the Start button on the top-right to begin this challenge: [NTDS.zip](https://huntress.ctf.games/files/f8be01a99abcaef1e447702200e8c7b3/NTDS.zip)
+
+---
+
+### Indirect Payload | 50 points | Miscellaneous -- *live challenge*
+
+![Alt text](sources/IP-challenge.png)
+
+> We saw this odd technique in a previous malware sample, where it would uncover it's next payload by... well, you'll see.
+>
+> Press the Start button in the top-right to begin this challenge.
+
+---
+
+### Babel | 50 points | Miscellaneous
+
+![Alt text](sources/Babel-challenge.png)
+
+> It's babel! Just a bunch of gibberish, right?
+>
+> Download the file below. [babel](https://huntress.ctf.games/files/493f69bb0ac1f0b5a44b8311a0c29eda/babel)
+
+---
+
+### lolz#4 | 0 points
+
+![Alt text](sources/lolz4-challenge.png)
+
+> I'm starting with the man in the mirror.
+>
+> ----- disclaimers (unrelated to the challenge) -----
+>
+> Discussion of this challenge is allowed in the thread #rejected-challenges.
+>
+> There are no points associated with this challenge, this is just for the lolz and bragging rights. No hints or help will be given. Brute force is not the answer here. This challenge (and all lolz challenges) may leave you with walking away saying "well that was some BS."
+>
+> Attachments: [image_3.png](https://huntress.ctf.games/files/d62cd9ab262e025be3577f3e05ddc28c/image_3.png)

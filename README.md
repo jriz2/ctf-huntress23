@@ -900,11 +900,9 @@ Answer: **`flag{ed81d24958127a2adccfb343012cebff}`**
 
 10. Execute the macro with the breakpoint to reveal a base64 encoded stored in teh Nuts & Oatmilk variables.
 
-    https://github.com/jriz2/ctf-huntress23/assets/108373636/c538872f-8a68-4e24-83a5-95a8bdeb4238
-    
-    <video src="sources/TR-debug.mp4" controls title="Title"></video>
+    https://github.com/jriz2/ctf-huntress23/assets/108373636/68165402-ea0f-478c-9471-245fc4c69ced
 
-12. Decode the base64 encoded string for the flag
+11. Decode the base64 encoded string for the flag
     ```PowerShell
     $base64String = "JGZsYWc9ImZsYWd7NjNkY2M4MmMzMDE5Nzc2OGY0ZDQ1OGRhMTJmNjE4YmN9Ig=="
     [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($base64String))
@@ -1126,7 +1124,6 @@ Answer: **`flag{93671c2c38ee872508770361ace37b02}`**
     * Locate the first CALL instruction, righ click on `echoBinSafe` and select "Patch Instruction"
     * Input the address value we captured above for `printFlag__Main_6` and press enter.
     * Select File > Export Program, change the format to "Original File" and save.
-
 
    https://github.com/jriz2/ctf-huntress23/assets/108373636/9845a476-dcad-494f-b8a8-100ce1374947
       
